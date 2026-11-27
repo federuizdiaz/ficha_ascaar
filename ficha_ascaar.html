@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @page {
+      size: 210mm 165mm;
+      margin: 10mm 14mm 8mm 14mm;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10.5pt;
+      color: #111;
+      margin: 0;
+      padding: 0;
+    }
+
+    .titulo-ascaar {
+      font-family: "Times New Roman", Georgia, serif;
+      font-size: 17pt;
+      font-weight: normal;
+      text-align: center;
+      margin: 0 0 14px 0;
+      letter-spacing: 0.2px;
+    }
+
+    .fila-fecha-hora {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .label-inline {
+      font-size: 10pt;
+      white-space: nowrap;
+    }
+
+    .cajas-fecha {
+      display: inline-flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .caja-fecha {
+      min-width: 48px;
+      width: auto;
+      height: 32px;
+      padding: 0 10px;
+      border: 1.3px solid #222;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10.5pt;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .linea-hora {
+      display: inline-block;
+      min-width: 95px;
+      border-bottom: 1px dashed #333;
+      padding: 0 4px 1px 4px;
+      text-align: center;
+    }
+
+    .bloque-campo {
+      margin-bottom: 12px;
+    }
+
+    .fila-doble {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 12px;
+    }
+
+    .campo-flex {
+      display: flex;
+      align-items: baseline;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .campo-flex.corto {
+      flex: 0 0 28%;
+    }
+
+    .etiqueta {
+      white-space: nowrap;
+      margin-right: 6px;
+      font-size: 10pt;
+    }
+
+    .dato-linea {
+      flex: 1;
+      border-bottom: 1px dashed #333;
+      padding: 0 4px 2px 4px;
+      min-height: 17px;
+      font-size: 10pt;
+      word-wrap: break-word;
+    }
+
+    .linea-extra {
+      border-bottom: 1px dashed #333;
+      min-height: 18px;
+      margin-top: 5px;
+      padding: 0 4px 2px 4px;
+      font-size: 10pt;
+    }
+
+    .fila-opciones {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+      border-bottom: 1px dashed #333;
+      padding-bottom: 4px;
+    }
+
+    .grupo-opcion {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      white-space: nowrap;
+      font-size: 10pt;
+    }
+
+    .opcion-item {
+      display: inline-block;
+      padding: 0 4px;
+    }
+
+    .marcada {
+      font-weight: bold;
+      border: 1.5px solid #111;
+      border-radius: 50%;
+      padding: 1px 5px;
+    }
+
+    .pie-firma {
+      margin-top: 8px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .caja-firma {
+      width: 240px;
+      text-align: center;
+      position: relative;
+    }
+
+    .img-firma {
+      max-width: 210px;
+      max-height: 80px;
+      display: block;
+      margin: 0 auto -10px auto;
+    }
+
+    .linea-firma {
+      border-bottom: 1px dashed #333;
+      height: 4px;
+      margin-bottom: 4px;
+    }
+
+    .texto-firma {
+      font-size: 9.5pt;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="titulo-ascaar">Asociación Correntina de Anestesia, Analgesia y Reanimación (ASCAAR)</h1>
+
+  <div class="fila-fecha-hora">
+    <span class="label-inline">Fecha:</span>
+    <div class="cajas-fecha">
+      <span class="caja-fecha">{{ dia }}</span>
+      <span class="caja-fecha">{{ mes }}</span>
+      <span class="caja-fecha">{{ anio }}</span>
+    </div>
+    <span class="label-inline" style="margin-left: 10px;">Hora:</span>
+    <span class="linea-hora">{{ hora }}</span>
+  </div>
+
+  <div class="fila-doble">
+    <div class="campo-flex" style="flex: 1.2;">
+      <span class="etiqueta">Obra Social:</span>
+      <span class="dato-linea">{{ obra_social }}</span>
+    </div>
+    <div class="campo-flex" style="flex: 1;">
+      <span class="etiqueta">Sanatorio:</span>
+      <span class="dato-linea">{{ sanatorio }}</span>
+    </div>
+  </div>
+
+  <div class="bloque-campo">
+    <div class="campo-flex">
+      <span class="etiqueta">Nombre Afiliado:</span>
+      <span class="dato-linea">{{ nombre_afiliado }}</span>
+    </div>
+  </div>
+
+  <div class="fila-doble">
+    <div class="campo-flex" style="flex: 1.5;">
+      <span class="etiqueta">N° de Afiliado:</span>
+      <span class="dato-linea">{{ nro_afiliado }}</span>
+    </div>
+    <div class="campo-flex corto">
+      <span class="etiqueta">Edad:</span>
+      <span class="dato-linea">{{ edad }}</span>
+    </div>
+  </div>
+
+  <div class="bloque-campo">
+    <div class="campo-flex">
+      <span class="etiqueta">Cirujano:</span>
+      <span class="dato-linea">{{ cirujano }}</span>
+    </div>
+  </div>
+
+  <div class="bloque-campo">
+    <div class="campo-flex">
+      <span class="etiqueta">Operaciones Realizadas:</span>
+      <span class="dato-linea">{{ operaciones_linea_1 }}</span>
+    </div>
+    <div class="linea-extra">{{ operaciones_linea_2 }}</div>
+  </div>
+
+  <div class="bloque-campo">
+    <div class="campo-flex">
+      <span class="etiqueta">Códigos de Anestesiología:</span>
+      <span class="dato-linea">{{ codigos_anestesiologia }}</span>
+    </div>
+  </div>
+
+  <div class="fila-opciones">
+    <div class="grupo-opcion">
+      <span>Evaluación Preoperatorio:</span>
+      <span class="opcion-item {% if eval_preop == 'SI' %}marcada{% endif %}">SI</span>
+      <span class="opcion-item {% if eval_preop == 'NO' %}marcada{% endif %}">NO</span>
+    </div>
+    <div class="grupo-opcion">
+      <span>Urgencia</span>
+      <span class="opcion-item {% if urgencia == 'SI' %}marcada{% endif %}">SI</span>
+      <span class="opcion-item {% if urgencia == 'NO' %}marcada{% endif %}">NO</span>
+    </div>
+  </div>
+
+  <div class="fila-opciones">
+    <div class="grupo-opcion">
+      <span>Nocturno:</span>
+      <span class="opcion-item {% if nocturno == 'SI' %}marcada{% endif %}">SI</span>
+      <span class="opcion-item {% if nocturno == 'NO' %}marcada{% endif %}">NO</span>
+    </div>
+    <div class="grupo-opcion">
+      <span>Feriado</span>
+      <span class="opcion-item {% if feriado == 'SI' %}marcada{% endif %}">SI</span>
+      <span class="opcion-item {% if feriado == 'NO' %}marcada{% endif %}">NO</span>
+    </div>
+    <div class="grupo-opcion">
+      <span>Fin de Semana</span>
+      <span class="opcion-item {% if fin_de_semana == 'SI' %}marcada{% endif %}">SI</span>
+      <span class="opcion-item {% if fin_de_semana == 'NO' %}marcada{% endif %}">NO</span>
+    </div>
+  </div>
+
+  <div class="bloque-campo">
+    <div class="campo-flex">
+      <span class="etiqueta">Nombre del Anestesiólogo:</span>
+      <span class="dato-linea">{{ nombre_anestesiologo }}</span>
+    </div>
+    <div class="linea-extra"></div>
+  </div>
+
+  <div class="pie-firma">
+    <div class="caja-firma">
+      <img src="firma_limpia.png" alt="Firma y Sello" class="img-firma">
+      <div class="linea-firma"></div>
+      <div class="texto-firma">Firma y Sello</div>
+    </div>
+  </div>
+</body>
+</html>

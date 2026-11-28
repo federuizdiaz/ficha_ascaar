@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @page {
+      size: 210mm 297mm;
+      margin: 0;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 210mm;
+      height: 297mm;
+      overflow: hidden;
+    }
+
+    /* La ficha en blanco (el Excel pasado a imagen) ocupa toda la hoja A4 */
+    .fondo {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 210mm;
+      height: 297mm;
+    }
+
+    /* Cada dato se ubica con coordenadas fijas sobre el fondo (en mm).
+       Tipografía igual a la del Excel: Calibri 8 pt negrita. */
+    .campo {
+      position: absolute;
+      display: block;
+      overflow: hidden;
+      white-space: nowrap;
+      font-family: Calibri, Carlito, Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      color: #000;
+      padding: 0 1mm;
+      box-sizing: border-box;
+    }
+
+    .izq { text-align: left; }
+    .centro { text-align: center; }
+
+    /* Escala de horas: Calibri 8 pt normal, centrada en cada columna.
+       El casillero es más ancho que la columna para que "15:00" no se corte. */
+    .hora {
+      position: absolute;
+      display: block;
+      white-space: nowrap;
+      font-family: Calibri, Carlito, Arial, Helvetica, sans-serif;
+      font-weight: normal;
+      font-size: 8pt;
+      color: #000;
+      text-align: center;
+      width: 12mm;
+      top: 93.47mm;
+      height: 5.08mm;
+      line-height: 5.08mm;
+    }
+  </style>
+</head>
+<body>
+  <img class="fondo" src="fondo_ficha_anestesia.png" alt="">
+
+  <!-- Sanatorio (arriba a la izquierda, puede extenderse hasta el título) -->
+  <div class="campo izq" style="left:23.75mm; top:14.10mm; width:79.76mm; height:5.08mm; line-height:5.08mm; font-size:{{ fs_sanatorio }}pt;">{{ sanatorio }}</div>
+
+  <!-- Paciente -->
+  <div class="campo izq" style="left:48.26mm; top:24.38mm; width:55.88mm; height:5.08mm; line-height:5.08mm; font-size:{{ fs_paciente }}pt;">{{ paciente }}</div>
+
+  <!-- Edad -->
+  <div class="campo izq" style="left:114.17mm; top:24.38mm; width:19.00mm; height:5.08mm; line-height:5.08mm; font-size:{{ fs_edad }}pt;">{{ edad }}</div>
+
+  <!-- Fecha -->
+  <div class="campo centro" style="left:144.15mm; top:24.38mm; width:15.24mm; height:5.08mm; line-height:5.08mm; font-size:{{ fs_fecha }}pt;">{{ fecha }}</div>
+
+  <!-- Procedimiento -->
+  <div class="campo izq" style="left:48.39mm; top:215.77mm; width:92.33mm; height:4.95mm; line-height:4.95mm; font-size:{{ fs_procedimiento }}pt;">{{ procedimiento }}</div>
+
+  <!-- Cirujano (se corta antes del sello para no taparlo) -->
+  <div class="campo centro" style="left:48.39mm; top:226.31mm; width:57.02mm; height:5.08mm; line-height:5.08mm; font-size:{{ fs_cirujano }}pt;">{{ cirujano }}</div>
+
+  <!-- Anestesiólogo (se corta antes del sello para no taparlo) -->
+  <div class="campo centro" style="left:48.39mm; top:231.65mm; width:57.02mm; height:4.95mm; line-height:4.95mm; font-size:{{ fs_anestesiologo }}pt;">{{ anestesiologo }}</div>
+
+  <!-- Escala de horas: arranca en la hora cargada en la app y suma 5 min por columna -->
+  <div class="hora" style="left:48.20mm; width:12.7mm; text-align:right;">{{ hora_0 }}</div>
+  <div class="hora" style="left:58.32mm;">{{ hora_1 }}</div>
+  <div class="hora" style="left:63.79mm;">{{ hora_2 }}</div>
+  <div class="hora" style="left:69.06mm;">{{ hora_3 }}</div>
+  <div class="hora" style="left:74.33mm;">{{ hora_4 }}</div>
+  <div class="hora" style="left:79.66mm;">{{ hora_5 }}</div>
+  <div class="hora" style="left:84.93mm;">{{ hora_6 }}</div>
+</body>
+</html>

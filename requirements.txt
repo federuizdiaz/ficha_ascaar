@@ -2,3 +2,5 @@ streamlit
 weasyprint
 jinja2
 pandas
+xlrd
+xlutils
